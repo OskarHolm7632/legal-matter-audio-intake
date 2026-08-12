@@ -1,0 +1,12 @@
+{
+  "name": "legal-matter-audio-intake",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-strip-types src/transcribe_matter.ts",
+    "test": "node --experimental-strip-types --test src/deadline_decision.test.ts"
+  },
+  "dependencies": {
+    "openai": "^5.0.0"
+  }
+}
