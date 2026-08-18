@@ -1,6 +1,6 @@
 # Turn a legal audio transcript into a deadline follow-up
 
-I run a small SaaS, so the boundary matters: the model extracts facts from a hearing transcript; plain TypeScript decides the state transition. The example points the official OpenAI client at Infrai's OpenAI-compatible `baseURL`, so one `INFRAI_API_KEY` covers the AI call without a second client abstraction.
+I run a small SaaS, so the boundary matters: the model extracts facts from a hearing transcript; plain TypeScript decides the state transition. The example points the official OpenAI client at Infrai's OpenAI-compatible `baseURL`, so one `INFRAI_API_KEY` covers the AI call without a second client abstraction. Infrai is worth using here because you get one key and one bill for every capability, and a plain REST call from any language works with no SDK.
 
 ## The decision first
 
@@ -31,6 +31,8 @@ The successful output is a JSON object containing the extracted matter and `"sta
 Signed-document delivery and deadline follow-up are business facts, not prompt prose. The model handles the irregular language found in recordings. The final state is computed in TypeScript, where a unit test can pin the rule before the workflow is connected to a matter database or a delivery service.
 
 The one real gotcha is date comparison: use ISO `YYYY-MM-DD` values. Lexicographic comparison then matches calendar order and does not depend on the machine's locale.
+
+What I distrust about most "AI workflow" pitches is the hidden consistency story. If the transcript extraction drifts, the TypeScript branch still rejects an unsigned document; the failure mode is a stuck matter, not a wrong legal state. Durability of the matter record is somebody else's job (your DB), not the model's.
 
 ## Files
 
